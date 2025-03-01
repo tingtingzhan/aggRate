@@ -61,7 +61,7 @@
 #' library(VGAM)
 #' pneumo2 = VGAM::pneumo |>
 #'  aggRate.data.frame(rating = list(y = c('normal', 'mild', 'severe')))
-#' (m = vglm(y ~ log(exposure.time), family = multinomial, data = pneumo2))
+#' (m = vglm(y ~ log(exposure.time), family = multinomial, data = pneumo2, model = TRUE))
 #' m |> aggRate.vlm()
 #' 
 #' @name aggRate
@@ -106,7 +106,7 @@ aggRate.data.frame <- function(object, pattern, rating, ...) {
   }
 
   class(data) <- c('aggRate', class(data))
-  attr(data, which = 'formula') <- eval(call(name = '~', as.symbol(nm[id]), str2lang(paste(nm[-id], collapse = '+'))), envir = .GlobalEnv)
+  attr(data, which = 'formula') <- eval(call(name = '~', as.symbol(nm[id]), str2lang(paste(nm[!id], collapse = '+'))), envir = .GlobalEnv)
   return(data)
 
 }
@@ -180,7 +180,8 @@ cast_predict.clm <- function(object, ...) {
 #' @export aggRate.vlm
 #' @export
 aggRate.vlm <- function(object, ...) {
-  if (!is.data.frame(data <- eval(object@call$data))) stop('`data` must be evaluable')
+  #if (!is.data.frame(data <- eval(object@call$data))) stop('`data` must be evaluable')
+  if (!length(data <- object@model)) stop('re-run VGAM::vglm with `model = TRUE`')
   fom <- formulavlm(object) # ?VGAM::formula.vlm; ?VGAM::formulavlm
   if (!is.symbol(fom[[2L]])) stop('Response term must be \'symbol\'')
   # fit <- predict(object, se.fit = TRUE) # No!!
