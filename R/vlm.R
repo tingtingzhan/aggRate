@@ -22,10 +22,11 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 #' @param x \link[VGAM]{vlm} or \link[VGAM]{vglm} object
 #' 
 #' @name S3_vlm
+#' @importFrom VGAM summaryvglm
 #' @export
 .pval.vglm <- function(x) {
   x |> 
-    summary() |> 
+    summaryvglm() |> 
     .pval.summary.vglm()
 }
 # getMethod('summary', signature(object = 'vglm')) # ?VGAM::summaryvglm
