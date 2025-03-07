@@ -58,6 +58,7 @@
 #'  aggRate.data.frame(rating = list(y = c('normal', 'mild', 'severe')))
 #' (m = vglm(y ~ log(exposure.time), family = multinomial, data = pneumo2, model = TRUE))
 #' m |> aggRate.vlm()
+#' m |> xlevels.vlm()
 #' 
 #' @name aggRate
 #' @export
@@ -200,10 +201,10 @@ nobs.aggRate <- function(object, ...) sum(object[[deparse1(attr(object, which = 
 
 
 
-
-
+#getMethod(f = 'familyname', signature = 'vlm')
+#' @importFrom VGAM familyname.vlm
 #' @export
-autoplot.vlm <- function(object, type = object@family@vfamily[1L], ...) {
+autoplot.vlm <- function(object, type = familyname.vlm(object), ...) {
   cl <- match.call()
   if (!length(cl$type) || cl$type != 'plain') {
     cl$type <- 'plain'

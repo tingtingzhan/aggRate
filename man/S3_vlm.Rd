@@ -4,11 +4,17 @@
 \alias{S3_vlm}
 \alias{.pval.vglm}
 \alias{.pval.summary.vglm}
+\alias{xlevels.vlm}
+\alias{nobsText.vlm}
 \title{S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects}
 \usage{
 .pval.vglm(x)
 
 .pval.summary.vglm(x)
+
+xlevels.vlm(x)
+
+nobsText.vlm(x)
 }
 \arguments{
 \item{x}{\link[VGAM]{vlm} or \link[VGAM]{vglm} object}

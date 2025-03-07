@@ -46,18 +46,85 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 
 
 
+# @rdname S3_vlm
+# @export
+#desc_.vlm <- function(x) {
+#  .Defunct(msg = 'make this [desc_.default] in \pkg{tzh}')
+#  ff <- x@family # 'vglmff'
+#  lnk <- getLink.vglmff(ff)
+#  clnk <- getCanonicalLink.vglmff(ff)
+#  if (lnk == clnk) return(familyname.vglmff(ff))
+#  return(paste0(familyname.vglmff(ff), ' (with ', xlnk, '-link)'))
+#}
+
+
+# getMethod(f = 'model.frame', signature = 'vlm')
+#' @rdname S3_vlm
+#' @importFrom VGAM model.framevlm
+#' @importFrom stats .getXlevels
+#' @export
+xlevels.vlm <- function(x) {
+  m <- model.framevlm(x)
+  trm <- m |> attr(which = 'terms', exact = TRUE)
+  .getXlevels(Terms = trm, m = m)
+}
+
+
+
+#' @rdname S3_vlm
+#' @importFrom VGAM formulavlm familyname.vlm
+#' @export
+nobsText.vlm <- function(x) {
+  
+  # I do not understand ?VGAM::nobs.vlm
+  
+  #if (!is.data.frame(data <- eval(x@call$data))) stop('data must be evaluable')
+  if (!is.data.frame(data <- x@model)) stop('rerun with `model = TRUE`')
+  fom <- formulavlm(x) # ?VGAM::formula.vlm
+  
+  if (familyname.vlm(x) %in% c('multinomial', 'cumulative', 'acat', 'cratio')) {
+    # multinomial logistic regression; `x@y`m is the observed(?) relative frequency (not observed freq)
+    yval <- eval(fom[[2L]], envir = data)
+    if (!is.matrix(yval)) stop('endpoint should be `cbind(...)`')
+    return(sprintf(fmt = '%d subjects', sum(yval)))
+  }
+  
+  stop('should not come here')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #' @title S3 Methods for `vglmff` Object
 #' 
 #' @param x `vglmff` family object
 #' 
 #' @name S3_vglmff
+#' @importFrom VGAM familyname.vglmff
 #' @export
 getCanonicalLink.vglmff <- function(x) {
-  x@vfamily[1L] |>
+  x |>
+    familyname.vglmff() |>
     do.call(args = list()) |> # all defaults; 'canonical'
     getLink.vglmff()
 }
+
+#getMethod(f = 'familyname', signature = 'vglmff')
 
 #' @rdname S3_vglmff
 #' @export

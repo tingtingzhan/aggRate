@@ -35,7 +35,7 @@ vglm_fams.clm <- function(object, ...) {
 
 
 #' @rdname vglm_fams
-#' @importFrom VGAM vglm cumulative cratio acat
+#' @importFrom VGAM vglm cumulative cratio acat familyname.vlm
 #' @export vglm_fams.aggRate
 #' @export
 vglm_fams.aggRate <- function(object, ...) {
@@ -69,7 +69,7 @@ vglm_fams.aggRate <- function(object, ...) {
   id <- which.min(ResSS)
   z <- vglm_mod[[id]]
   if (id != 1L) message(sprintf(fmt = 'VGAM::%s for smaller residual sum of squares (%.3f vs %.3f)', 
-                                z@family@vfamily[1L],
+                                familyname.vlm(z),
                                 ResSS[id], ResSS[1L]))
   return(z)
 }
