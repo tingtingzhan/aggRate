@@ -13,6 +13,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Encoding: UTF-8
 License: GPL-2
-Depends: R (>= 4.4), ggplot2
-Imports: reshape2, matrixStats, VGAM
+Depends: R (>= 4.4), ggplot2, VGAM
+Imports: reshape2, matrixStats
 Suggests: MASS, ordinal 
