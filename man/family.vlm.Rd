@@ -17,3 +17,14 @@ Function \link{family.vlm} returns a \code{'vglmff'} object.
 \description{
 Get Family from \link[VGAM]{vlm} Object
 }
+\examples{
+library(VGAM)
+pneumo = transform(pneumo, let = log(exposure.time))
+(m1 = vglm(cbind(normal, mild, severe) ~ let, family = multinomial, data = pneumo))
+(m2 = vglm(cbind(normal, mild, severe) ~ let, family = propodds, data = pneumo))
+(m3 = vglm(cbind(normal, mild, severe) ~ let, family = acat, data = pneumo))
+m1 |> desc_.vlm()
+m2 |> desc_.vlm()
+m3 |> desc_.vlm()
+
+}

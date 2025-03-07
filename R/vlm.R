@@ -8,6 +8,16 @@
 #' @returns 
 #' Function [family.vlm] returns a `'vglmff'` object.
 #' 
+#' @examples
+#' library(VGAM)
+#' pneumo = transform(pneumo, let = log(exposure.time))
+#' (m1 = vglm(cbind(normal, mild, severe) ~ let, family = multinomial, data = pneumo))
+#' (m2 = vglm(cbind(normal, mild, severe) ~ let, family = propodds, data = pneumo))
+#' (m3 = vglm(cbind(normal, mild, severe) ~ let, family = acat, data = pneumo))
+#' m1 |> desc_.vlm()
+#' m2 |> desc_.vlm()
+#' m3 |> desc_.vlm()
+#' 
 #' @importFrom stats family
 #' @export family.vlm
 #' @export
@@ -46,16 +56,22 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 
 
 
-# @rdname S3_vlm
-# @export
-#desc_.vlm <- function(x) {
-#  .Defunct(msg = 'make this [desc_.default] in \pkg{tzh}')
-#  ff <- x@family # 'vglmff'
-#  lnk <- getLink.vglmff(ff)
-#  clnk <- getCanonicalLink.vglmff(ff)
-#  if (lnk == clnk) return(familyname.vglmff(ff))
-#  return(paste0(familyname.vglmff(ff), ' (with ', xlnk, '-link)'))
-#}
+#' @rdname S3_vlm
+#' @importFrom VGAM familyname.vglmff
+#' @export
+desc_.vlm <- function(x) {
+  ff <- x@family # 'vglmff'
+  fnm <- familyname.vglmff(ff)
+  fnm <- switch(fnm, 
+                cumulative = 'cumulative probability', 
+                acat = 'adjacent-categories-ratio', # ?VGAM::acat
+                cratio = 'continuation-ratio', # ?VGAM::cratio
+                fnm)
+  lnk <- getLink.vglmff(ff)
+  clnk <- getCanonicalLink.vglmff(ff)
+  if (lnk == clnk) return(fnm)
+  return(paste0(fnm, ' (with ', lnk, '-link)'))
+}
 
 
 # getMethod(f = 'model.frame', signature = 'vlm')

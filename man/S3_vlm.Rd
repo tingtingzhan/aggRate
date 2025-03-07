@@ -4,6 +4,7 @@
 \alias{S3_vlm}
 \alias{.pval.vglm}
 \alias{.pval.summary.vglm}
+\alias{desc_.vlm}
 \alias{xlevels.vlm}
 \alias{nobsText.vlm}
 \title{S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects}
@@ -11,6 +12,8 @@
 .pval.vglm(x)
 
 .pval.summary.vglm(x)
+
+desc_.vlm(x)
 
 xlevels.vlm(x)
 
