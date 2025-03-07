@@ -70,26 +70,22 @@ xlevels.vlm <- function(x) {
 }
 
 
-
+# getMethod(f = 'model.frame', signature = 'vlm')
 #' @rdname S3_vlm
-#' @importFrom VGAM formulavlm familyname.vlm
+#' @importFrom VGAM model.framevlm
 #' @export
 nobsText.vlm <- function(x) {
   
-  # I do not understand ?VGAM::nobs.vlm
-  
-  #if (!is.data.frame(data <- eval(x@call$data))) stop('data must be evaluable')
-  if (!is.data.frame(data <- x@model)) stop('rerun with `model = TRUE`')
-  fom <- formulavlm(x) # ?VGAM::formula.vlm
+  # I do not understand VGAM::nobs.vlm(, type = 'vlm')
   
   if (familyname.vlm(x) %in% c('multinomial', 'cumulative', 'acat', 'cratio')) {
-    # multinomial logistic regression; `x@y`m is the observed(?) relative frequency (not observed freq)
-    yval <- eval(fom[[2L]], envir = data)
-    if (!is.matrix(yval)) stop('endpoint should be `cbind(...)`')
-    return(sprintf(fmt = '%d subjects', sum(yval)))
-  }
+    # multinomial logistic regression
+    (model.framevlm(x)[[1L]]) |> 
+      sum() |>
+      sprintf(fmt = '%d subjects')
+
+  } else stop('should not come here')
   
-  stop('should not come here')
 }
 
 
