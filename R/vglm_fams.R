@@ -20,9 +20,6 @@
 #' library(ordinal)
 #' clm(rating ~ temp + contact, data = ordinal::wine) |>
 #'  vglm_fams()
-#' clm(rating ~ temp + contact + judge, data = ordinal::wine) |>
-#'  vglm_fams()
-#' 
 #' @name vglm_fams
 #' @export
 vglm_fams <- function(object, ...) UseMethod('vglm_fams')
