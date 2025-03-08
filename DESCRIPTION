@@ -14,5 +14,5 @@ RoxygenNote: 7.3.2
 Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.4), ggplot2
-Imports: reshape2, matrixStats, VGAM
-Suggests: MASS, ordinal 
+Imports: reshape2, matrixStats, ordinal, VGAM
+Suggests: MASS
