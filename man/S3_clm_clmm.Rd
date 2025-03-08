@@ -4,6 +4,7 @@
 \alias{S3_clm_clmm}
 \alias{coef0.clm}
 \alias{coef0.clmm}
+\alias{confint.clmm}
 \alias{terms.clmm}
 \alias{.pval.summary.clm}
 \alias{.pval.summary.clmm}
@@ -18,6 +19,8 @@
 coef0.clm(x)
 
 coef0.clmm(x)
+
+\method{confint}{clmm}(object, ...)
 
 \method{terms}{clmm}(x, type = c("formula", "scale", "nominal", "all"), ...)
 

@@ -24,6 +24,21 @@ coef0.clm <- function(x) x$beta
 #' @export
 coef0.clmm <- coef0.clm
 
+# ?ordinal:::confint.clm includes only *beta* coefficients
+
+# we do not have ordinal:::confint.clmm, as of packageDate('ordinal') 2023-12-04
+# it dispatches to stats:::confint.default
+# we *cannot* force ?ordinal:::confint.clm onto \link[ordinal]{clmm} object, error!!
+#' @rdname S3_clm_clmm
+#' @importFrom stats confint confint.default
+#' @export confint.clmm
+#' @export
+confint.clmm <- function(object, ...) {
+  tmp <- confint.default(object, ...)
+  tmp[names(object$beta), , drop = FALSE]
+}
+
+
 
 #' @rdname S3_clm_clmm
 #' @importFrom stats terms
