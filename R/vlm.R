@@ -41,7 +41,7 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 }
 # getMethod('summary', signature(object = 'vglm')) # ?VGAM::summaryvglm
 # getMethod('summary', signature(object = 'vlm')) # ?VGAM::summaryvlm
-
+# `summary.vlm` is not S3 export. write Dr. Yee again....
 
 #' @rdname S3_vlm
 #' @export
@@ -52,6 +52,7 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
   return(ret)
 }
 
+# .pval.summary.vlm <- functio(x) ...
 # I don't know a 'vlm' example yet
 
 
