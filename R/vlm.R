@@ -75,6 +75,8 @@ desc_.vlm <- function(x) {
 
 
 # getMethod(f = 'model.frame', signature = 'vlm')
+# if \pkg{VGAM} author accepts tzh's suggestion (to export S3 method model.frame.vlm; 2025-03-07) 
+# [xlevels.vlm()] can be deleted (and dispatch to tzh::xlevels.default)  
 #' @rdname S3_vlm
 #' @importFrom VGAM model.framevlm
 #' @importFrom stats .getXlevels
