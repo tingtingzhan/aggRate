@@ -1,4 +1,46 @@
 
+#' @title S3 Methods that should be in \pkg{VGAM} Package
+#' 
+#' @param object,formula a \link[VGAM]{vlm} or \link[VGAM]{vglm} object
+#' 
+#' @param ... S3 method dispatch holder
+#' 
+#' @details
+#' tzh has written to Dr. Yee about some of these
+#' 
+#' @name S3_VGAM
+#' @importFrom VGAM summaryvglm
+#' @export summary.vglm
+#' @export
+summary.vglm <- function(object, ...) summaryvglm(object = object, ...)
+# getMethod('summary', signature(object = 'vglm')) 
+# ?VGAM::summaryvglm
+
+#' @rdname S3_VGAM
+#' @importFrom VGAM summaryvlm
+#' @export summary.vlm
+#' @export
+summary.vlm <- function(object, ...) summaryvlm(object, ...)
+# getMethod('summary', signature(object = 'vlm'))
+# ?VGAM::summaryvlm # does not have `...` parameter!!
+# eh, tzh forgot to write to Dr. Yee about [summary.vlm()]
+
+#' @rdname S3_VGAM
+#' @importFrom stats model.frame
+#' @importFrom VGAM model.framevlm
+#' @export model.frame.vlm
+#' @export
+model.frame.vlm <- function(formula, ...) model.framevlm(object = formula, ...)
+# getMethod(f = 'model.frame', signature = 'vlm')
+
+
+
+
+
+
+
+
+
 #' @title Get Family from \link[VGAM]{vlm} Object
 #' 
 #' @param object \link[VGAM]{vlm} object
@@ -26,45 +68,12 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 
 
 
-# remove after Dr. Yee makes this
-# getMethod('summary', signature(object = 'vglm')) 
-# ?VGAM::summaryvglm
-#' @importFrom VGAM summaryvglm
-#' @export
-summary.vglm <- summaryvglm
-
-# getMethod('summary', signature(object = 'vlm'))
-# ?VGAM::summaryvlm # does not have `...` parameter!!
-#' @importFrom VGAM summaryvlm
-#' @export
-summary.vlm <- function(object, ...) summaryvlm(object, ...)
-# eh, tzh forgot to write to Dr. Yee about [summary.vlm]
-
-# getMethod(f = 'model.frame', signature = 'vlm')
-#' @importFrom stats model.frame
-#' @importFrom VGAM model.framevlm
-#' @export
-model.frame.vlm <- function(formula, ...) model.framevlm(object = formula, ...)
-
-# end of remove after Dr. Yee makes this
-  
 
 #' @title S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects
 #' 
 #' @param x \link[VGAM]{vlm} or \link[VGAM]{vglm} object
 #' 
 #' @name S3_vlm
-# @importFrom VGAM summaryvglm
-# @export
-#.pval.vglm <- function(x) {
-#  x |> 
-#    summaryvglm() |> 
-#    .pval.summary.vglm()
-#}
-
-
-
-#' @rdname S3_vlm
 #' @export
 .pval.summary.vglm <- function(x) {
   cf <- x@coef3
@@ -96,18 +105,8 @@ desc_.vlm <- function(x) {
 }
 
 
-# @rdname S3_vlm
-# @importFrom VGAM model.framevlm
-# @importFrom stats .getXlevels
-# @export
-#xlevels.vlm <- function(x) {
-#  m <- model.framevlm(x)
-#  trm <- m |> attr(which = 'terms', exact = TRUE)
-#  .getXlevels(Terms = trm, m = m)
-#}
 
 
-# getMethod(f = 'model.frame', signature = 'vlm')
 #' @rdname S3_vlm
 #' @importFrom VGAM model.framevlm
 #' @export
