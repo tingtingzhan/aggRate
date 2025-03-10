@@ -2,8 +2,8 @@
 % Please edit documentation in R/clm.R
 \name{S3_clm_clmm}
 \alias{S3_clm_clmm}
-\alias{coef0.clm}
-\alias{coef0.clmm}
+\alias{coef_.clm}
+\alias{coef_.clmm}
 \alias{confint.clmm}
 \alias{terms.clmm}
 \alias{.pval.summary.clm}
@@ -16,9 +16,9 @@
 \alias{nobsText.clmm}
 \title{S3 methods for \link[ordinal]{clm} and \link[ordinal]{clmm} Objects}
 \usage{
-coef0.clm(x)
+coef_.clm(x)
 
-coef0.clmm(x)
+coef_.clmm(x)
 
 \method{confint}{clmm}(object, ...)
 

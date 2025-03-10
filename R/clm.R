@@ -17,12 +17,12 @@
 #' 
 #' @name S3_clm_clmm
 #' @export
-coef0.clm <- function(x) x$beta
+coef_.clm <- function(x) x$beta
 # I do not like ?ordinal:::coef.clm 
 
 #' @rdname S3_clm_clmm
 #' @export
-coef0.clmm <- coef0.clm
+coef_.clmm <- coef_.clm
 
 # ?ordinal:::confint.clm includes only *beta* coefficients
 
