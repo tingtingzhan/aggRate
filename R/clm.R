@@ -10,7 +10,11 @@
 #' ?ordinal::clm
 #' ?ordinal::clmm
 #' m1 = clm(rating ~ temp + contact, data = wine)
+#' 
 #' m2 = clmm(rating ~ temp + contact + (1|judge), data = wine)
+#' m2 |> coef_.clmm()
+#' m2 |> summary() |> .pval.summary.clm()
+#' m2 |> confint()
 #' m2 |> nobsText.clmm()
 #' 
 #' m3 = clm(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
@@ -51,7 +55,7 @@ terms.clmm <- ordinal:::terms.clm
 #' @rdname S3_clm_clmm
 #' @export
 .pval.summary.clm <- function(x) {
-  cf <- x$coefficients
+  cf <- x$coefficients[names(x$beta), , drop = FALSE]
   ret <- cf[, 'Pr(>|z|)']
   names(ret) <- rownames(cf) # nrow-1 drops rownames
   return(ret)

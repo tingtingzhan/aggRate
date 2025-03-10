@@ -53,7 +53,11 @@ library(ordinal)
 ?ordinal::clm
 ?ordinal::clmm
 m1 = clm(rating ~ temp + contact, data = wine)
+
 m2 = clmm(rating ~ temp + contact + (1|judge), data = wine)
+m2 |> coef_.clmm()
+m2 |> summary() |> .pval.summary.clm()
+m2 |> confint()
 m2 |> nobsText.clmm()
 
 m3 = clm(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
