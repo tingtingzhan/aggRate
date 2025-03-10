@@ -1,5 +1,5 @@
 
-#' @title S3 Methods that should be in \pkg{VGAM} Package
+#' @title Missing S3 Methods in \pkg{VGAM} Package
 #' 
 #' @param object,formula a \link[VGAM]{vlm} or \link[VGAM]{vglm} object
 #' 
@@ -82,7 +82,7 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
   return(ret)
 }
 
-# .pval.summary.vlm <- functio(x) ...
+# .pval.summary.vlm <- function(x) {}
 # I don't know a 'vlm' example yet
 
 

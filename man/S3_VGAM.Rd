@@ -5,7 +5,7 @@
 \alias{summary.vglm}
 \alias{summary.vlm}
 \alias{model.frame.vlm}
-\title{S3 Methods that should be in \pkg{VGAM} Package}
+\title{Missing S3 Methods in \pkg{VGAM} Package}
 \usage{
 \method{summary}{vglm}(object, ...)
 
@@ -19,7 +19,7 @@
 \item{...}{S3 method dispatch holder}
 }
 \description{
-S3 Methods that should be in \pkg{VGAM} Package
+Missing S3 Methods in \pkg{VGAM} Package
 }
 \details{
 tzh has written to Dr. Yee about some of these
