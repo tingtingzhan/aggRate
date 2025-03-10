@@ -2,20 +2,14 @@
 % Please edit documentation in R/vlm.R
 \name{S3_vlm}
 \alias{S3_vlm}
-\alias{.pval.vglm}
 \alias{.pval.summary.vglm}
 \alias{desc_.vlm}
-\alias{xlevels.vlm}
 \alias{nobsText.vlm}
 \title{S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects}
 \usage{
-.pval.vglm(x)
-
 .pval.summary.vglm(x)
 
 desc_.vlm(x)
-
-xlevels.vlm(x)
 
 nobsText.vlm(x)
 }

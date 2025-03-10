@@ -58,7 +58,6 @@
 #'  aggRate.data.frame(rating = list(y = c('normal', 'mild', 'severe')))
 #' (m = vglm(y ~ log(exposure.time), family = multinomial, data = pneumo2, model = TRUE))
 #' m |> aggRate.vlm()
-#' m |> xlevels.vlm()
 #' 
 #' @name aggRate
 #' @export

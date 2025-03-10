@@ -26,22 +26,43 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 
 
 
+# remove after Dr. Yee makes this
+# getMethod('summary', signature(object = 'vglm')) 
+# ?VGAM::summaryvglm
+#' @importFrom VGAM summaryvglm
+#' @export
+summary.vglm <- summaryvglm
+
+# getMethod('summary', signature(object = 'vlm'))
+# ?VGAM::summaryvlm # does not have `...` parameter!!
+#' @importFrom VGAM summaryvlm
+#' @export
+summary.vlm <- function(object, ...) summaryvlm(object, ...)
+# eh, tzh forgot to write to Dr. Yee about [summary.vlm]
+
+# getMethod(f = 'model.frame', signature = 'vlm')
+#' @importFrom stats model.frame
+#' @importFrom VGAM model.framevlm
+#' @export
+model.frame.vlm <- function(formula, ...) model.framevlm(object = formula, ...)
+
+# end of remove after Dr. Yee makes this
+  
 
 #' @title S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects
 #' 
 #' @param x \link[VGAM]{vlm} or \link[VGAM]{vglm} object
 #' 
 #' @name S3_vlm
-#' @importFrom VGAM summaryvglm
-#' @export
-.pval.vglm <- function(x) {
-  x |> 
-    summaryvglm() |> 
-    .pval.summary.vglm()
-}
-# getMethod('summary', signature(object = 'vglm')) # ?VGAM::summaryvglm
-# getMethod('summary', signature(object = 'vlm')) # ?VGAM::summaryvlm
-# `summary.vlm` is not S3 export. write Dr. Yee again....
+# @importFrom VGAM summaryvglm
+# @export
+#.pval.vglm <- function(x) {
+#  x |> 
+#    summaryvglm() |> 
+#    .pval.summary.vglm()
+#}
+
+
 
 #' @rdname S3_vlm
 #' @export
@@ -75,18 +96,15 @@ desc_.vlm <- function(x) {
 }
 
 
-# getMethod(f = 'model.frame', signature = 'vlm')
-# if \pkg{VGAM} author accepts tzh's suggestion (to export S3 method model.frame.vlm; 2025-03-07) 
-# [xlevels.vlm()] can be deleted (and dispatch to tzh::xlevels.default)  
-#' @rdname S3_vlm
-#' @importFrom VGAM model.framevlm
-#' @importFrom stats .getXlevels
-#' @export
-xlevels.vlm <- function(x) {
-  m <- model.framevlm(x)
-  trm <- m |> attr(which = 'terms', exact = TRUE)
-  .getXlevels(Terms = trm, m = m)
-}
+# @rdname S3_vlm
+# @importFrom VGAM model.framevlm
+# @importFrom stats .getXlevels
+# @export
+#xlevels.vlm <- function(x) {
+#  m <- model.framevlm(x)
+#  trm <- m |> attr(which = 'terms', exact = TRUE)
+#  .getXlevels(Terms = trm, m = m)
+#}
 
 
 # getMethod(f = 'model.frame', signature = 'vlm')
