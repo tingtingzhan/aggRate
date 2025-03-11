@@ -1,20 +1,4 @@
 
-
-
-
-#setClass(Class = 'aggRate', contains = 'data.frame', slots = c(
-#  formula = 'formula',
-#  .est = 'matrix',
-#  .lower = 'matrix',
-#  .upper = 'matrix'
-#), prototype = prototype(
-#  .est = array(NA_real_, dim = c(0L, 0L)),
-#  .lower = array(NA_real_, dim = c(0L, 0L)),
-#  .upper = array(NA_real_, dim = c(0L, 0L))
-#))
-
-
-
 #' @title Create Aggregated 'Flat' Format of Rating Data
 #' 
 #' @description

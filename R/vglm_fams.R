@@ -46,7 +46,7 @@ vglm_fams.aggRate <- function(object, ...) {
   fom <- attr(object, which = 'formula', exact = TRUE)
   
   vglm_mod <- list(
-    cumulative(parallel = TRUE), # first one must be equivalent to \code{clm}
+    cumulative(parallel = TRUE), # first one must be equivalent to ?ordinal::clm
     cratio(parallel = TRUE),
     acat(parallel = TRUE)
     # Future!!! try different `link` and `parallel`
