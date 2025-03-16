@@ -32,7 +32,6 @@ vglm_fams.clm <- function(object, ...) {
   fr <- aggRate.clm(object)
   vlm0 <- vglm_fams.aggRate(fr, ...)
   if (!length(vlm0)) return(object) # exception
-  if (length(old_terms <- object$old_terms)) attr(vlm0, which = 'old_terms') <- old_terms
   return(vlm0)
 }
 
