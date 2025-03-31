@@ -44,13 +44,6 @@ confint.clmm <- function(object, ...) {
 
 
 
-#' @rdname S3_clm_clmm
-#' @importFrom stats terms
-#' @export terms.clmm
-#' @export
-terms.clmm <- ordinal:::terms.clm 
-# ?ordinal:::terms.clm function interface is function(x, type, ...)
-# otherwise ?ordinal:::get_clmDesign inside ?ordinal:::model.matrix.clm will have error
 
 #' @rdname S3_clm_clmm
 #' @export
@@ -116,5 +109,22 @@ nobsText.clmm <- function(x) {
           x$dims$nobs,
           paste(sprintf(fmt = '%d `%s`', ng, names(ng)), collapse = ' nexted in '))
 }
+
+
+
+
+#' @rdname S3_clm_clmm
+#' @importFrom stats terms
+#' @export terms.clmm
+#' @export
+terms.clmm <- ordinal:::terms.clm 
+# ?ordinal:::terms.clm function interface is function(x, type, ...)
+# otherwise ?ordinal:::get_clmDesign inside ?ordinal:::model.matrix.clm will have error
+
+
+
+
+
+
 
 

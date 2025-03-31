@@ -28,7 +28,7 @@ autolayer.aggRate <- function(object, type = c('plain', 'cumulative', 'acat', 'c
     cumulative = link_flatRate(object, type = 'cumulative'),
     acat = link_flatRate(object, type = 'acat'),
     cratio = link_flatRate(object, type = 'cratio')
-  ), FUN = function(i) {
+  ), FUN = \(i) {
     if (!length(i)) return(invisible())
     melt(data = data.frame(object[id.vars], i, check.names = FALSE), 
          id.vars = id.vars, measure.vars = colnames(i), variable.name = rnm)

@@ -50,7 +50,7 @@ vglm_fams.aggRate <- function(object, ...) {
     acat(parallel = TRUE)
     # Future!!! try different `link` and `parallel`
   ) |>
-    lapply(FUN = function(fam) {
+    lapply(FUN = \(fam) {
       m <- tryCatch(expr = vglm(formula = fom, family = fam, data = as.data.frame(object), model = TRUE, ...), warning = identity)
       if (inherits(m, what = 'warning')) {
         # print(m$message)
@@ -67,7 +67,7 @@ vglm_fams.aggRate <- function(object, ...) {
   }
   
   #ResSS <- lapply(vglm_mod, FUN = slot, name = 'ResSS') # needs to @importFrom methods slot
-  ResSS <- lapply(vglm_mod, FUN = function(i) i@ResSS) # stopifnot(is.primitive(`@`))
+  ResSS <- lapply(vglm_mod, FUN = \(i) i@ResSS) # stopifnot(is.primitive(`@`))
   id <- which.min(ResSS)
   z <- vglm_mod[[id]]
   if (id != 1L) message(sprintf(fmt = 'VGAM::%s for smaller residual sum of squares (%.3f vs %.3f)', 

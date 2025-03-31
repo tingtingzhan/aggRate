@@ -5,7 +5,6 @@
 \alias{coef_.clm}
 \alias{coef_.clmm}
 \alias{confint.clmm}
-\alias{terms.clmm}
 \alias{.pval.summary.clm}
 \alias{.pval.summary.clmm}
 \alias{getCanonicalLink.clm}
@@ -14,6 +13,7 @@
 \alias{desc_.clm}
 \alias{desc_.clmm}
 \alias{nobsText.clmm}
+\alias{terms.clmm}
 \title{S3 methods for \link[ordinal]{clm} and \link[ordinal]{clmm} Objects}
 \usage{
 coef_.clm(x)
@@ -21,8 +21,6 @@ coef_.clm(x)
 coef_.clmm(x)
 
 \method{confint}{clmm}(object, ...)
-
-\method{terms}{clmm}(x, type = c("formula", "scale", "nominal", "all"), ...)
 
 .pval.summary.clm(x)
 
@@ -39,6 +37,8 @@ desc_.clm(x)
 desc_.clmm(x)
 
 nobsText.clmm(x)
+
+\method{terms}{clmm}(x, type = c("formula", "scale", "nominal", "all"), ...)
 }
 \arguments{
 \item{x, object}{\link[ordinal]{clm} or \link[ordinal]{clmm} object}
