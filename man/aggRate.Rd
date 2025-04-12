@@ -30,7 +30,7 @@ aggRate(object, ...)
 \item{data}{..}
 }
 \description{
-Function \link{aggRate} creates aggregate counts rating data \emph{flat} format,
+Function \code{\link[=aggRate]{aggRate()}} creates aggregate counts rating data \emph{flat} format,
 for \link[VGAM]{vglm} as well as human eyes.
 Each row represents the aggregated rating records for a single \emph{product},
 and each column denotes the levels of rating (e.g. \link[VGAM]{wine}).

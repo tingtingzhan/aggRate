@@ -3,7 +3,7 @@
 #' 
 #' @description
 #' 
-#' Function [aggRate] creates aggregate counts rating data *flat* format,
+#' Function [aggRate()] creates aggregate counts rating data *flat* format,
 #' for \link[VGAM]{vglm} as well as human eyes.
 #' Each row represents the aggregated rating records for a single *product*, 
 #' and each column denotes the levels of rating (e.g. \link[VGAM]{wine}).

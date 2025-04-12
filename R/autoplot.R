@@ -10,8 +10,9 @@
 #' 
 #' @param ... ..
 #' 
-#' @importFrom ggplot2 autolayer facet_grid label_both geom_line
+#' @importFrom ggplot2 autolayer aes facet_grid label_both geom_line
 #' @importFrom reshape2 melt
+#' @importFrom rlang .data
 #' @export autolayer.aggRate
 #' @export
 autolayer.aggRate <- function(object, type = c('plain', 'cumulative', 'acat', 'cratio'), ...) {
@@ -36,7 +37,8 @@ autolayer.aggRate <- function(object, type = c('plain', 'cumulative', 'acat', 'c
   
   type <- match.arg(type)
   
-  mp <- eval(call(name = 'aes', x = as.symbol(rnm), y = quote(value), group = as.symbol(id.vars[1L]), colour = as.symbol(id.vars[1L])))
+  mp <- aes(x = .data[[rnm]], y = .data$value, group = .data[[id.vars[1L]]], colour = .data[[id.vars[1L]]])
+  
   list(
     switch(type, plain = list(
       geom_line(data = dats$obs, mapping = mp),
