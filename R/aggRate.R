@@ -202,7 +202,9 @@ autoplot.vlm <- function(object, type = familyname.vlm(object), ...) {
 
 #' @export
 print.aggRate <- function(x, ...) {
-  print(autoplot.aggRate(x, ...))
+  x |>
+    autoplot.aggRate(...) |> 
+    print()
 }
 
 
