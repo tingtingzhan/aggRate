@@ -21,12 +21,6 @@
 #' @importFrom matrixStats rowCumsums
 #' 
 #' @examples 
-#' VGAM::wine |>
-#'  aggRate.data.frame(pattern = c(bitter = '^bitter'))
-#' 
-#' ordinal::wine |> 
-#'  aggRate.formula(formula = rating ~ temp + contact)
-#'  
 #' m = MASS::housing |>
 #'  reshape2::dcast(formula = Infl + Type + Cont ~ Sat, value.var = 'Freq') |>
 #'  aggRate.data.frame(rating = list(Sat = c('Low', 'Medium', 'High')))

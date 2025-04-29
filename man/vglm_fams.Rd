@@ -20,13 +20,4 @@ vglm_fams(object, ...)
 \description{
 To try multiple family choices and select the one with the least \code{ResSS}.
 }
-\examples{
-m = VGAM::wine |>
- aggRate.data.frame(pattern = c(bitter = '^bitter')) |>
- vglm_fams()
-autoplot(m, type = 'plain')
-
-library(ordinal)
-clm(rating ~ temp + contact, data = ordinal::wine) |>
- vglm_fams()
-}
+\keyword{internal}

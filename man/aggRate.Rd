@@ -36,12 +36,6 @@ Each row represents the aggregated rating records for a single \emph{product},
 and each column denotes the levels of rating (e.g. \link[VGAM]{wine}).
 }
 \examples{
-VGAM::wine |>
- aggRate.data.frame(pattern = c(bitter = '^bitter'))
-
-ordinal::wine |> 
- aggRate.formula(formula = rating ~ temp + contact)
- 
 m = MASS::housing |>
  reshape2::dcast(formula = Infl + Type + Cont ~ Sat, value.var = 'Freq') |>
  aggRate.data.frame(rating = list(Sat = c('Low', 'Medium', 'High')))

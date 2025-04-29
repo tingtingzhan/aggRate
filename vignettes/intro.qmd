@@ -1,0 +1,162 @@
+---
+title: "aggRate: Aggregated Rating Data"
+author: Tingting Zhan
+format: 
+  html:
+    page-layout: full
+    html-math-method: katex
+toc: true
+toc-location: left
+toc-depth: 4
+toc-title: ''
+editor: visual
+vignette: >
+  %\VignetteIndexEntry{intro}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+This vignette of package **`aggRate`** ([Github](https://github.com/tingtingzhan/aggRate), [RPubs](https://rpubs.com/tingtingzhan/aggRate)) documents the visualization of aggregated rating data.
+
+## Prerequisite
+
+New features are first implemented on [Github](https://github.com/tingtingzhan/aggRate).
+
+```{r}
+#| warning: false
+#| eval: false
+remotes::install_github('tingtingzhan/aggRate')
+```
+
+## Note to Users
+
+Examples in this vignette require that the `search` path has
+
+```{r}
+#| message: false
+library(aggRate)
+library(ggplot2)
+```
+
+```{r}
+#| echo: false
+library(knitr) # for tables in this vignette
+#options(mc.cores = 1L) # for CRAN submission
+theme_bw() |> theme_set()
+```
+
+## Terms and Abbreviations
+
+```{r}
+#| echo: false
+#| results: asis
+c(
+  '[|>](https://search.r-project.org/R/refmans/base/html/pipeOp.html)', 'Forward pipe operator introduced in `R` 4.1.0', 
+  '`$`', '[Extract](https://search.r-project.org/R/refmans/base/html/Extract.html) parts of an object',
+  '[`aggregate`](https://search.r-project.org/R/refmans/stats/html/aggregate.html)', 'Aggregated statistics', 
+  '`CRAN`, `R`', '[The Comprehensive R Archive Network](https://cran.r-project.org)',
+  '[`class`](https://search.r-project.org/R/refmans/base/html/class.html)', 'Object class',
+  '[`flextable`](https://search.r-project.org/CRAN/refmans/flextable/html/flextable.html)', 'Flexible tables',
+  '[`regex`](https://search.r-project.org/R/refmans/base/html/regex.html)', '[Regular expression](https://en.wikipedia.org/wiki/Regular_expression)',
+  '`S3`, `generic`, [`methods`](https://search.r-project.org/R/refmans/utils/html/methods.html)', '`S3` object oriented system, [`UseMethod`](https://search.r-project.org/R/refmans/base/html/UseMethod.html); [`getS3method`](https://search.r-project.org/R/refmans/utils/html/getS3method.html); <https://adv-r.hadley.nz/s3.html>',  
+  '`S4`, `generic`, `methods`', '`S4` object oriented system, [`isS4`](https://search.r-project.org/R/refmans/base/html/isS4.html); [`setClass`](https://search.r-project.org/R/refmans/methods/html/setClass.html); [`getMethod`](https://search.r-project.org/R/refmans/methods/html/getMethod.html); <https://adv-r.hadley.nz/s4.html>',
+  '[`search`](https://search.r-project.org/R/refmans/base/html/search.html)', 'Search path',
+  '[`seed`](https://search.r-project.org/R/refmans/base/html/Random.html)', 'Random number generation seed'
+) |>
+  matrix(nrow = 2L, dimnames = list(c('Term / Abbreviation', 'Description'), NULL)) |>
+  t.default() |>
+  as.data.frame.matrix() |> 
+  kable() 
+```
+
+# `aggRate`
+
+The `S3` generic function `aggRate()` converts various objects into `aggRate` class.
+
+## From `data.frame`
+
+The `S3` dispatch `aggRate.formula()` converts a `data.frame` to `aggRate`.
+
+```{r}
+ordinal::wine |> head()
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+ordinal::wine |> 
+  aggRate.formula(formula = rating ~ temp + contact)
+```
+
+## From an `aggregate`d `data.frame`
+
+The `S3` dispatch `aggRate.data.frame()` converts an `aggregate`d `data.frame` to `aggRate` by specifying the `pattern` of rating counts.
+
+```{r}
+VGAM::wine
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+VGAM::wine |>
+  aggRate.data.frame(pattern = c(bitter = '^bitter'))
+```
+
+## From cumulative link models
+
+The `S3` dispatch `aggRate.clm()` ..
+
+-   solid line is actual observation
+-   dash line is model fit
+
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+ordinal::clm(rating ~ temp * contact, data = ordinal::wine) |>
+ aggRate.clm()
+```
+
+## From vector generalized linear models
+
+The `S3` dispatch `aggRate.vlm()` ...
+
+```{r}
+VGAM::wine |>
+  within.data.frame(expr = {
+    bitter = cbind(bitter1, bitter2, bitter3, bitter4, bitter5) 
+  }) |> 
+  VGAM::vglm(formula = bitter ~ temp * contact, family = VGAM::multinomial, model = TRUE) |>
+  aggRate.vlm()
+```
+
+# Best Link for Multinomial Model
+
+Function `vglm_fams()` explores the best link for multinomial model among candidates
+
+-   `VGAM::cumulative(parallel = TRUE)`
+-   `VGAM::cratio(parallel = TRUE)`
+-   `VGAM::acat(parallel = TRUE)`
+
+and pick the choice with minimum `@ResSS`.
+
+```{r}
+m = VGAM::wine |>
+ aggRate.data.frame(pattern = c(bitter = '^bitter')) |>
+  vglm_fams.aggRate()
+```
+
+```{r}
+m |> autoplot()
+```
+
+```{r}
+(m2 = ordinal::clm(rating ~ temp + contact, data = ordinal::wine) |>
+ vglm_fams.clm())
+```
+
+```{r}
+!identical(m, m2) #but they are mathematically equivalent
+```
