@@ -13,11 +13,11 @@
 R Markdown Lines of \link[VGAM]{vlm} object
 }
 \examples{
-library(VGAM); library(rmd.tzh); library(ecip)
+library(VGAM); library(ecip)
 pneumo = transform(pneumo, let = log(exposure.time))
 list(
  '`vglm`' = vglm(cbind(normal, mild, severe) ~ let, propodds, data = pneumo)
-) |> render_(file = 'vglm')
+) |> rmd.tzh::render_(file = 'vglm')
 
 }
 \keyword{internal}

@@ -147,11 +147,11 @@ terms.clmm <- ordinal:::terms.clm
 #' @param x,xnm,... ..
 #' 
 #' @examples
-#' library(ordinal); library(rmd.tzh); library(ecip)
+#' library(ordinal); library(ecip)
 #' list(
 #'  '`clm`' = clm(rating ~ temp + contact, data = ordinal::wine), 
 #'  '`clmm`' = clmm(rating ~ temp + contact + (1|judge), data = ordinal::wine)
-#' ) |> render_(file = 'clm_clmm')
+#' ) |> rmd.tzh::render_(file = 'clm_clmm')
 #' 
 #' @name md_ordinal
 #' @importFrom rmd.tzh md_
