@@ -20,11 +20,15 @@
 #' m3 = clm(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
 #' 
 #' @name S3_clm_clmm
+#' @importFrom ecip coef_
+#' @export coef_.clm
 #' @export
 coef_.clm <- function(x) x$beta
 # I do not like ?ordinal:::coef.clm 
 
 #' @rdname S3_clm_clmm
+#' @importFrom ecip coef_
+#' @export coef_.clmm
 #' @export
 coef_.clmm <- coef_.clm
 
@@ -46,6 +50,9 @@ confint.clmm <- function(object, ...) {
 
 
 #' @rdname S3_clm_clmm
+#' @importFrom ecip .pval
+#' @method .pval summary.clm
+#' @export .pval.summary.clm
 #' @export
 .pval.summary.clm <- function(x) {
   cf <- x$coefficients[names(x$beta), , drop = FALSE]
@@ -55,17 +62,24 @@ confint.clmm <- function(object, ...) {
 }
 
 #' @rdname S3_clm_clmm
+#' @importFrom ecip .pval
+#' @method .pval summary.clmm
+#' @export .pval.summary.clmm
 #' @export
 .pval.summary.clmm <- .pval.summary.clm
 
 
 #' @rdname S3_clm_clmm
 #' @importFrom ordinal clm
+#' @importFrom ecip getCanonicalLink
+#' @export getCanonicalLink.clm
 #' @export
 getCanonicalLink.clm <- function(x) eval(formals(fun = clm)$link)[1L]
 
 #' @rdname S3_clm_clmm
 #' @importFrom ordinal clmm
+#' @importFrom ecip getCanonicalLink
+#' @export getCanonicalLink.clmm
 #' @export
 getCanonicalLink.clmm <- function(x) eval(formals(fun = clmm)$link)[1L]
 
@@ -84,6 +98,8 @@ model.matrix.clm <- function(object, ...) {
 
 
 #' @rdname S3_clm_clmm
+#' @importFrom ecip desc_
+#' @export desc_.clm
 #' @export
 desc_.clm <- function(x) {
   switch(lk <- x$link, logit = {
@@ -92,6 +108,8 @@ desc_.clm <- function(x) {
 }
 
 #' @rdname S3_clm_clmm
+#' @importFrom ecip desc_
+#' @export desc_.clmm
 #' @export
 desc_.clmm <- function(x) paste('mixed-effect', desc_.clm(x))
 
@@ -99,6 +117,8 @@ desc_.clmm <- function(x) paste('mixed-effect', desc_.clm(x))
 #' @rdname S3_clm_clmm
 # @importFrom nlme ranef
 #' @importFrom ordinal ranef
+#' @importFrom ecip nobsText
+#' @export nobsText.clmm
 # ?ordinal::ranef is indeed ?nlme::ranef
 # I want to see if I can avoid Imports: nlme by this way!
 #' @export
@@ -121,6 +141,31 @@ terms.clmm <- ordinal:::terms.clm
 # ?ordinal:::terms.clm function interface is function(x, type, ...)
 # otherwise ?ordinal:::get_clmDesign inside ?ordinal:::model.matrix.clm will have error
 
+
+#' @title R Markdown Lines for \link[ordinal]{clm} and \link[ordinal]{clmm} Objects
+#' 
+#' @param x,xnm,... ..
+#' 
+#' @examples
+#' library(ordinal); library(rmd.tzh); library(ecip)
+#' list(
+#'  '`clm`' = clm(rating ~ temp + contact, data = ordinal::wine), 
+#'  '`clmm`' = clmm(rating ~ temp + contact + (1|judge), data = ordinal::wine)
+#' ) |> render_(file = 'clm_clmm')
+#' 
+#' @name md_ordinal
+#' @importFrom rmd.tzh md_
+#' @importFrom ecip md_ecip
+#' @export md_.clm
+#' @export
+md_.clm <- md_ecip
+
+#' @rdname md_ordinal
+#' @importFrom rmd.tzh md_
+#' @importFrom ecip md_ecip
+#' @export md_.clmm
+#' @export
+md_.clmm <- md_ecip
 
 
 

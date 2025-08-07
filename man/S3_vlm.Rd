@@ -7,11 +7,11 @@
 \alias{nobsText.vlm}
 \title{S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects}
 \usage{
-.pval.summary.vglm(x)
+\method{.pval}{summary.vglm}(x)
 
-desc_.vlm(x)
+\method{desc_}{vlm}(x)
 
-nobsText.vlm(x)
+\method{nobsText}{vlm}(x)
 }
 \arguments{
 \item{x}{\link[VGAM]{vlm} or \link[VGAM]{vglm} object}
@@ -19,3 +19,4 @@ nobsText.vlm(x)
 \description{
 S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects
 }
+\keyword{internal}

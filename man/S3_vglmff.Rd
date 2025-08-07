@@ -6,7 +6,7 @@
 \alias{getLink.vglmff}
 \title{S3 Methods for \code{vglmff} Object}
 \usage{
-getCanonicalLink.vglmff(x)
+\method{getCanonicalLink}{vglmff}(x)
 
 getLink.vglmff(x)
 }

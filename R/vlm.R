@@ -37,7 +37,11 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 #' 
 #' @param x \link[VGAM]{vlm} or \link[VGAM]{vglm} object
 #' 
+#' @keywords internal
 #' @name S3_vlm
+#' @importFrom ecip .pval
+#' @method .pval summary.vglm
+#' @export .pval.summary.vglm
 #' @export
 .pval.summary.vglm <- function(x) {
   cf <- x@coef3
@@ -53,6 +57,8 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 
 #' @rdname S3_vlm
 #' @importFrom VGAM familyname.vglmff
+#' @importFrom ecip desc_
+#' @export desc_.vlm
 #' @export
 desc_.vlm <- function(x) {
   ff <- x@family # 'vglmff'
@@ -73,6 +79,8 @@ desc_.vlm <- function(x) {
 
 #' @rdname S3_vlm
 #' @importFrom VGAM model.framevlm
+#' @importFrom ecip nobsText
+#' @export nobsText.vlm
 #' @export
 nobsText.vlm <- function(x) {
   
@@ -91,6 +99,24 @@ nobsText.vlm <- function(x) {
 
 
 
+
+#' @title R Markdown Lines of \link[VGAM]{vlm} object
+#' 
+#' @param x,xnm,... ..
+#' 
+#' @examples
+#' library(VGAM); library(rmd.tzh); library(ecip)
+#' pneumo = transform(pneumo, let = log(exposure.time))
+#' list(
+#'  '`vglm`' = vglm(cbind(normal, mild, severe) ~ let, propodds, data = pneumo)
+#' ) |> render_(file = 'vglm')
+#' 
+#' @keywords internal
+#' @importFrom rmd.tzh md_
+#' @importFrom ecip md_ecip
+#' @export md_.vlm
+#' @export
+md_.vlm <- md_ecip
 
 
 

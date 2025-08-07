@@ -16,27 +16,27 @@
 \alias{terms.clmm}
 \title{S3 methods for \link[ordinal]{clm} and \link[ordinal]{clmm} Objects}
 \usage{
-coef_.clm(x)
+\method{coef_}{clm}(x)
 
-coef_.clmm(x)
+\method{coef_}{clmm}(x)
 
 \method{confint}{clmm}(object, ...)
 
-.pval.summary.clm(x)
+\method{.pval}{summary.clm}(x)
 
-.pval.summary.clmm(x)
+\method{.pval}{summary.clmm}(x)
 
-getCanonicalLink.clm(x)
+\method{getCanonicalLink}{clm}(x)
 
-getCanonicalLink.clmm(x)
+\method{getCanonicalLink}{clmm}(x)
 
 \method{model.matrix}{clm}(object, ...)
 
-desc_.clm(x)
+\method{desc_}{clm}(x)
 
-desc_.clmm(x)
+\method{desc_}{clmm}(x)
 
-nobsText.clmm(x)
+\method{nobsText}{clmm}(x)
 
 \method{terms}{clmm}(x, type = c("formula", "scale", "nominal", "all"), ...)
 }
