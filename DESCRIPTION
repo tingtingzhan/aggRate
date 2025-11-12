@@ -14,7 +14,7 @@ Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.5)
 Imports: geomtextpath (== 0.2.0), ggplot2 (== 4.0.0), rlang (== 1.1.6), 
-    scales (== 1.4.0), reshape2 (== 1.4.4), matrixStats (== 1.5.0), 
+    scales (== 1.4.0), reshape2 (== 1.4.5), matrixStats (== 1.5.0), 
     ordinal (== 2023.12.4.1), VGAM (== 1.1.13),
     rmd.tzh, ecip
 Suggests: 
