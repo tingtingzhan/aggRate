@@ -2,19 +2,13 @@
 % Please edit documentation in R/S3_VGAM.R
 \name{S3_VGAM}
 \alias{S3_VGAM}
-\alias{summary.vglm}
 \alias{summary.vlm}
-\alias{model.frame.vlm}
 \title{Missing S3 Methods in \pkg{VGAM} Package}
 \usage{
-\method{summary}{vglm}(object, ...)
-
 \method{summary}{vlm}(object, ...)
-
-\method{model.frame}{vlm}(formula, ...)
 }
 \arguments{
-\item{object, formula}{a \link[VGAM]{vlm} or \link[VGAM]{vglm} object}
+\item{object}{a \link[VGAM]{vlm} object}
 
 \item{...}{S3 method dispatch holder}
 }
@@ -22,5 +16,5 @@
 Missing S3 Methods in \pkg{VGAM} Package
 }
 \details{
-tzh has written to Dr. Yee about some of these ..
+tzh forgot to write to Dr. Yee about \code{\link[=summary.vlm]{summary.vlm()}}..
 }
