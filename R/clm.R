@@ -151,17 +151,17 @@ terms.clmm <- ordinal:::terms.clm
 #' list(
 #'  '`clm`' = clm(rating ~ temp + contact, data = ordinal::wine), 
 #'  '`clmm`' = clmm(rating ~ temp + contact + (1|judge), data = ordinal::wine)
-#' ) |> rmd.tzh::render_(file = 'clm_clmm')
+#' ) |> fastmd::render_(file = 'clm_clmm')
 #' 
 #' @name md_ordinal
-#' @importFrom rmd.tzh md_
+#' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
 #' @export md_.clm
 #' @export
 md_.clm <- md_ecip
 
 #' @rdname md_ordinal
-#' @importFrom rmd.tzh md_
+#' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
 #' @export md_.clmm
 #' @export

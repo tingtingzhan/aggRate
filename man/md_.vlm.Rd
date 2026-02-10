@@ -17,7 +17,7 @@ library(VGAM); library(ecip)
 pneumo = transform(pneumo, let = log(exposure.time))
 list(
  '`vglm`' = vglm(cbind(normal, mild, severe) ~ let, propodds, data = pneumo)
-) |> rmd.tzh::render_(file = 'vglm')
+) |> fastmd::render_(file = 'vglm')
 
 }
 \keyword{internal}

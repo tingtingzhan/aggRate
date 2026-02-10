@@ -109,10 +109,10 @@ nobsText.vlm <- function(x) {
 #' pneumo = transform(pneumo, let = log(exposure.time))
 #' list(
 #'  '`vglm`' = vglm(cbind(normal, mild, severe) ~ let, propodds, data = pneumo)
-#' ) |> rmd.tzh::render_(file = 'vglm')
+#' ) |> fastmd::render_(file = 'vglm')
 #' 
 #' @keywords internal
-#' @importFrom rmd.tzh md_
+#' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
 #' @export md_.vlm
 #' @export
