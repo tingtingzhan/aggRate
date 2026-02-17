@@ -21,6 +21,6 @@ library(ordinal); library(ecip)
 list(
  '`clm`' = clm(rating ~ temp + contact, data = ordinal::wine), 
  '`clmm`' = clmm(rating ~ temp + contact + (1|judge), data = ordinal::wine)
-) |> fastmd::render_(file = 'clm_clmm')
+) |> fastmd::render2html(file = 'clm_clmm')
 
 }

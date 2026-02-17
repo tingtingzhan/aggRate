@@ -109,7 +109,7 @@ nobsText.vlm <- function(x) {
 #' pneumo = transform(pneumo, let = log(exposure.time))
 #' list(
 #'  '`vglm`' = vglm(cbind(normal, mild, severe) ~ let, propodds, data = pneumo)
-#' ) |> fastmd::render_(file = 'vglm')
+#' ) |> fastmd::render2html(file = 'vglm')
 #' 
 #' @keywords internal
 #' @importFrom fastmd md_
