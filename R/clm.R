@@ -151,7 +151,7 @@ terms.clmm <- ordinal:::terms.clm
 #' list(
 #'  '`clm`' = clm(rating ~ temp + contact, data = ordinal::wine), 
 #'  '`clmm`' = clmm(rating ~ temp + contact + (1|judge), data = ordinal::wine)
-#' ) |> fastmd::render2html(file = 'clm_clmm')
+#' ) |> fastmd::render2html()
 #' 
 #' @name md_ordinal
 #' @importFrom fastmd md_
