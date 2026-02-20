@@ -62,4 +62,8 @@ m2 |> nobsText.clmm()
 
 m3 = clm(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
 
+library(ecip); list(
+ '`clm`' = m1, 
+ '`clmm`' = m2
+) |> fastmd::render2html()
 }

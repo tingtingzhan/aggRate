@@ -12,7 +12,7 @@
 \item{...}{additional parameters, currently not in use}
 }
 \value{
-Function \link{family.vlm} returns a \code{'vglmff'} object.
+The \code{S3} method \code{\link[=family.vlm]{family.vlm()}} returns a \code{'vglmff'} object.
 }
 \description{
 Get Family from \link[VGAM]{vlm} Object
@@ -27,4 +27,7 @@ m1 |> desc_.vlm()
 m2 |> desc_.vlm()
 m3 |> desc_.vlm()
 
+library(ecip); list(
+ '`vglm`' = m2
+) |> fastmd::render2html()
 }

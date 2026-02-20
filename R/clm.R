@@ -19,6 +19,10 @@
 #' 
 #' m3 = clm(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
 #' 
+#' library(ecip); list(
+#'  '`clm`' = m1, 
+#'  '`clmm`' = m2
+#' ) |> fastmd::render2html()
 #' @name S3_clm_clmm
 #' @importFrom ecip coef_
 #' @export coef_.clm
@@ -142,28 +146,13 @@ terms.clmm <- ordinal:::terms.clm
 # otherwise ?ordinal:::get_clmDesign inside ?ordinal:::model.matrix.clm will have error
 
 
-#' @title R Markdown Lines for \link[ordinal]{clm} and \link[ordinal]{clmm} Objects
-#' 
-#' @param x,xnm,... ..
-#' 
-#' @examples
-#' library(ordinal); library(ecip)
-#' list(
-#'  '`clm`' = clm(rating ~ temp + contact, data = ordinal::wine), 
-#'  '`clmm`' = clmm(rating ~ temp + contact + (1|judge), data = ordinal::wine)
-#' ) |> fastmd::render2html()
-#' 
-#' @name md_ordinal
 #' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
-#' @export md_.clm
 #' @export
 md_.clm <- md_ecip
 
-#' @rdname md_ordinal
 #' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
-#' @export md_.clmm
 #' @export
 md_.clmm <- md_ecip
 

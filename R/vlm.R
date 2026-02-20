@@ -12,7 +12,7 @@
 #' @param ... additional parameters, currently not in use
 #' 
 #' @returns 
-#' Function [family.vlm] returns a `'vglmff'` object.
+#' The `S3` method [family.vlm()] returns a `'vglmff'` object.
 #' 
 #' @examples
 #' library(VGAM)
@@ -24,6 +24,9 @@
 #' m2 |> desc_.vlm()
 #' m3 |> desc_.vlm()
 #' 
+#' library(ecip); list(
+#'  '`vglm`' = m2
+#' ) |> fastmd::render2html()
 #' @importFrom stats family
 #' @export family.vlm
 #' @export
@@ -100,21 +103,8 @@ nobsText.vlm <- function(x) {
 
 
 
-#' @title R Markdown Lines of \link[VGAM]{vlm} object
-#' 
-#' @param x,xnm,... ..
-#' 
-#' @examples
-#' library(VGAM); library(ecip)
-#' pneumo = transform(pneumo, let = log(exposure.time))
-#' list(
-#'  '`vglm`' = vglm(cbind(normal, mild, severe) ~ let, propodds, data = pneumo)
-#' ) |> fastmd::render2html()
-#' 
-#' @keywords internal
 #' @importFrom fastmd md_
 #' @importFrom ecip md_ecip
-#' @export md_.vlm
 #' @export
 md_.vlm <- md_ecip
 
