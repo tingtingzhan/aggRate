@@ -127,7 +127,7 @@ desc_.clmm <- function(x) paste('mixed-effect', desc_.clm(x))
 # I want to see if I can avoid Imports: nlme by this way!
 #' @export
 nobsText.clmm <- function(x) {
-  ng <- vapply(ranef(x), FUN = .row_names_info, type = 2L, FUN.VALUE = NA_integer_, USE.NAMES = TRUE) # ?ordinal:::ranef.clmm
+  ng <- vapply(ranef(x), FUN = nrow, FUN.VALUE = NA_integer_, USE.NAMES = TRUE) # ?ordinal:::ranef.clmm
   # ?ordinal:::nobs.clmm
   sprintf(fmt = '%d records from %s', 
           x$dims$nobs,
