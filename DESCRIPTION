@@ -18,8 +18,4 @@ Imports: geomtextpath (== 0.2.0), ggplot2 (== 4.0.2), rlang (== 1.1.7),
     ordinal (== 2025.12.29), VGAM (== 1.1.14),
     fastmd, ecip
 Suggests: 
-    MASS (== 7.3.65),
-    knitr,
-    quarto,
-    rmarkdown
-VignetteBuilder: quarto
+    MASS (== 7.3.65)
