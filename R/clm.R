@@ -1,38 +1,27 @@
 
-#' @title S3 methods for \link[ordinal]{clm} and \link[ordinal]{clmm} Objects
-#' 
-#' @param x,object \link[ordinal]{clm} or \link[ordinal]{clmm} object
-#' 
-#' @param type,... additional parameters for S3 method dispatches
+#' @title \link[ordinal]{clm} and \link[ordinal]{clmm} Objects
 #' 
 #' @examples
 #' library(ordinal)
 #' ?ordinal::clm
 #' ?ordinal::clmm
 #' m1 = clm(rating ~ temp + contact, data = wine)
-#' 
 #' m2 = clmm(rating ~ temp + contact + (1|judge), data = wine)
-#' m2 |> coef_.clmm()
-#' m2 |> summary() |> .pval.summary.clm()
-#' m2 |> confint()
-#' m2 |> nobsText.clmm()
-#' 
 #' m3 = clm(Sat ~ Infl + Type + Cont, weights = Freq, data = MASS::housing)
-#' 
 #' library(ecip); list(
-#'  '`clm`' = m1, 
+#'  '`clm`' = list(m1, m3),
 #'  '`clmm`' = m2
 #' ) |> fastmd::render2html()
-#' @name S3_clm_clmm
+#' @name clm_clmm
+NULL
+
+
 #' @importFrom ecip coef_
-#' @export coef_.clm
 #' @export
 coef_.clm <- function(x) x$beta
 # I do not like ?ordinal:::coef.clm 
 
-#' @rdname S3_clm_clmm
 #' @importFrom ecip coef_
-#' @export coef_.clmm
 #' @export
 coef_.clmm <- coef_.clm
 
@@ -41,9 +30,6 @@ coef_.clmm <- coef_.clm
 # we do not have ordinal:::confint.clmm, as of packageDate('ordinal') 2023-12-04
 # it dispatches to stats:::confint.default
 # we *cannot* force ?ordinal:::confint.clm onto \link[ordinal]{clmm} object, error!!
-#' @rdname S3_clm_clmm
-#' @importFrom stats confint confint.default
-#' @export confint.clmm
 #' @export
 confint.clmm <- function(object, ...) {
   tmp <- confint.default(object, ...)
@@ -53,10 +39,8 @@ confint.clmm <- function(object, ...) {
 
 
 
-#' @rdname S3_clm_clmm
 #' @importFrom ecip .pval
 #' @method .pval summary.clm
-#' @export .pval.summary.clm
 #' @export
 .pval.summary.clm <- function(x) {
   cf <- x$coefficients[names(x$beta), , drop = FALSE]
@@ -65,33 +49,25 @@ confint.clmm <- function(object, ...) {
   return(ret)
 }
 
-#' @rdname S3_clm_clmm
 #' @importFrom ecip .pval
 #' @method .pval summary.clmm
-#' @export .pval.summary.clmm
 #' @export
 .pval.summary.clmm <- .pval.summary.clm
 
 
-#' @rdname S3_clm_clmm
 #' @importFrom ordinal clm
 #' @importFrom ecip getCanonicalLink
-#' @export getCanonicalLink.clm
 #' @export
 getCanonicalLink.clm <- function(x) eval(formals(fun = clm)$link)[1L]
 
-#' @rdname S3_clm_clmm
 #' @importFrom ordinal clmm
 #' @importFrom ecip getCanonicalLink
-#' @export getCanonicalLink.clmm
 #' @export
 getCanonicalLink.clmm <- function(x) eval(formals(fun = clmm)$link)[1L]
 
 
 
 model_matrix_clm <- ordinal:::model.matrix.clm
-#' @rdname S3_clm_clmm
-#' @importFrom stats model.matrix
 #' @export
 model.matrix.clm <- function(object, ...) {
   # overwrite ?ordinal:::model.matrix.clm
@@ -101,9 +77,7 @@ model.matrix.clm <- function(object, ...) {
 # ?ordinal:::model.matrix.clmm is fine!!
 
 
-#' @rdname S3_clm_clmm
 #' @importFrom ecip desc_
-#' @export desc_.clm
 #' @export
 desc_.clm <- function(x) {
   switch(lk <- x$link, logit = {
@@ -111,18 +85,14 @@ desc_.clm <- function(x) {
   }, paste0('cumulative probability (', lk, '-link)'))
 }
 
-#' @rdname S3_clm_clmm
 #' @importFrom ecip desc_
-#' @export desc_.clmm
 #' @export
 desc_.clmm <- function(x) paste('mixed-effect', desc_.clm(x))
 
 
-#' @rdname S3_clm_clmm
 # @importFrom nlme ranef
 #' @importFrom ordinal ranef
 #' @importFrom ecip nobsText
-#' @export nobsText.clmm
 # ?ordinal::ranef is indeed ?nlme::ranef
 # I want to see if I can avoid Imports: nlme by this way!
 #' @export
@@ -137,9 +107,6 @@ nobsText.clmm <- function(x) {
 
 
 
-#' @rdname S3_clm_clmm
-#' @importFrom stats terms
-#' @export terms.clmm
 #' @export
 terms.clmm <- ordinal:::terms.clm 
 # ?ordinal:::terms.clm function interface is function(x, type, ...)

@@ -13,7 +13,7 @@
 #' @keywords internal
 #' @name vglm_fams
 #' @export
-vglm_fams <- function(object, ...) UseMethod('vglm_fams')
+vglm_fams <- function(object, ...) UseMethod(generic = 'vglm_fams')
 
 
 #' @rdname vglm_fams

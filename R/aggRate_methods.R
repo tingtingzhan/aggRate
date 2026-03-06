@@ -1,21 +1,10 @@
 
 
-#' @title autolayer.aggRate
-#' 
-#' @description ..
-#' 
-#' @param object ..
-#' 
-#' @param type ..
-#' 
-#' @param ... ..
-#' 
 #' @importFrom geomtextpath geom_textline
 #' @importFrom ggplot2 autolayer aes facet_grid label_both geom_line scale_y_continuous labs
 #' @importFrom reshape2 melt
 #' @importFrom rlang .data
 #' @importFrom scales label_percent
-#' @export autolayer.aggRate
 #' @export
 autolayer.aggRate <- function(object, type = c('plain', 'cumulative', 'acat', 'cratio'), ...) {
   

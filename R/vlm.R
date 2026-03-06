@@ -1,18 +1,7 @@
 
 
 
-
-
-
-
-#' @title Get Family from \link[VGAM]{vlm} Object
-#' 
-#' @param object \link[VGAM]{vlm} object
-#' 
-#' @param ... additional parameters, currently not in use
-#' 
-#' @returns 
-#' The `S3` method [family.vlm()] returns a `'vglmff'` object.
+#' @title \link[VGAM]{vlm} Object
 #' 
 #' @examples
 #' library(VGAM)
@@ -20,31 +9,37 @@
 #' (m1 = vglm(cbind(normal, mild, severe) ~ let, family = multinomial, data = pneumo))
 #' (m2 = vglm(cbind(normal, mild, severe) ~ let, family = propodds, data = pneumo))
 #' (m3 = vglm(cbind(normal, mild, severe) ~ let, family = acat, data = pneumo))
-#' m1 |> desc_.vlm()
-#' m2 |> desc_.vlm()
-#' m3 |> desc_.vlm()
-#' 
 #' library(ecip); list(
-#'  '`vglm`' = m2
+#'  '`multinomial`' = m1,
+#'  '`propodds`' = m2,
+#'  '`acat`' = m3
 #' ) |> fastmd::render2html()
-#' @importFrom stats family
-#' @export family.vlm
+#' @name vlm
+NULL
+
+
+
 #' @export
 family.vlm <- function(object, ...) object@family # 'vglmff'
-# so that I can use my [getLink.default]
+# so that I can use ecip:::getLink.default()
 
 
 
 
-#' @title S3 methods of \link[VGAM]{vlm} and \link[VGAM]{vglm} Objects
-#' 
-#' @param x \link[VGAM]{vlm} or \link[VGAM]{vglm} object
-#' 
-#' @keywords internal
-#' @name S3_vlm
+# tzh forgot to write to Dr. Yee about [summary.vlm()]..
+#' @importFrom VGAM summaryvlm
+#' @export
+summary.vlm <- function(object, ...) summaryvlm(object, ...)
+# methods::getMethod('summary', signature(object = 'vlm'))
+# ?VGAM::summaryvlm # does not have `...` parameter!!
+
+
+
+
+
+
 #' @importFrom ecip .pval
 #' @method .pval summary.vglm
-#' @export .pval.summary.vglm
 #' @export
 .pval.summary.vglm <- function(x) {
   cf <- x@coef3
@@ -58,10 +53,8 @@ family.vlm <- function(object, ...) object@family # 'vglmff'
 
 
 
-#' @rdname S3_vlm
 #' @importFrom VGAM familyname.vglmff
 #' @importFrom ecip desc_
-#' @export desc_.vlm
 #' @export
 desc_.vlm <- function(x) {
   ff <- x@family # 'vglmff'
@@ -80,10 +73,8 @@ desc_.vlm <- function(x) {
 
 
 
-#' @rdname S3_vlm
 #' @importFrom VGAM model.framevlm
 #' @importFrom ecip nobsText
-#' @export nobsText.vlm
 #' @export
 nobsText.vlm <- function(x) {
   
@@ -115,19 +106,8 @@ md_.vlm <- md_ecip
 
 
 
-
-
-
-
-
-
-
-#' @title S3 Methods for `vglmff` Object
-#' 
-#' @param x `vglmff` family object
-#' 
-#' @name S3_vglmff
 #' @importFrom VGAM familyname.vglmff
+#' @importFrom ecip getCanonicalLink
 #' @export
 getCanonicalLink.vglmff <- function(x) {
   x |>
@@ -138,7 +118,7 @@ getCanonicalLink.vglmff <- function(x) {
 
 #getMethod(f = 'familyname', signature = 'vglmff')
 
-#' @rdname S3_vglmff
+#' @importFrom ecip getLink
 #' @export
 getLink.vglmff <- function(x) x@infos()$link |> vlm_link()
 

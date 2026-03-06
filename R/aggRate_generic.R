@@ -87,7 +87,6 @@ aggRate.data.frame <- function(object, pattern, rating, ...) {
 
 
 #' @rdname aggRate
-#' @importFrom stats aggregate
 #' @export aggRate.formula
 #' @export
 aggRate.formula <- function(formula, data, ...) {
@@ -115,7 +114,6 @@ aggRate.formula <- function(formula, data, ...) {
 
 
 #' @rdname aggRate
-#' @importFrom stats formula predict
 #' @export aggRate.clm
 #' @export
 aggRate.clm <- function(object, ...) {
@@ -168,7 +166,6 @@ aggRate.vlm <- function(object, ...) {
 
 
 
-#' @importFrom stats nobs
 #' @export
 nobs.aggRate <- function(object, ...) sum(object[[deparse1(attr(object, which = 'formula', exact = TRUE)[[2L]])]])
 
