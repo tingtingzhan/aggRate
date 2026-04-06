@@ -78,17 +78,25 @@ model.matrix.clm <- function(object, ...) {
 
 
 #' @importFrom ecip desc_
+#' @importClassesFrom fastmd md_lines
 #' @export
 desc_.clm <- function(x) {
   switch(lk <- x$link, logit = {
-    return('propotional odds') # canonical link
-  }, paste0('cumulative probability (', lk, '-link)'))
+    'propotional odds' |> # canonical link
+      new(Class = 'md_lines')
+  }, {
+    paste0('cumulative probability (', lk, '-link)') |>
+      new(Class = 'md_lines')
+  })
 }
 
 #' @importFrom ecip desc_
+#' @importClassesFrom fastmd md_lines
 #' @export
-desc_.clmm <- function(x) paste('mixed-effect', desc_.clm(x))
-
+desc_.clmm <- function(x) {
+  paste('mixed-effect', desc_.clm(x)) |>
+    new(Class = 'md_lines')
+}
 
 # @importFrom nlme ranef
 #' @importFrom ordinal ranef

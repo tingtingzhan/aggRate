@@ -55,6 +55,7 @@ summary.vlm <- function(object, ...) summaryvlm(object, ...)
 
 #' @importFrom VGAM familyname.vglmff
 #' @importFrom ecip desc_
+#' @importClassesFrom fastmd md_lines
 #' @export
 desc_.vlm <- function(x) {
   ff <- x@family # 'vglmff'
@@ -66,8 +67,9 @@ desc_.vlm <- function(x) {
                 fnm)
   lnk <- getLink.vglmff(ff)
   clnk <- getCanonicalLink.vglmff(ff)
-  if (lnk == clnk) return(fnm)
-  return(paste0(fnm, ' (with ', lnk, '-link)'))
+  if (lnk != clnk) fnm <- paste0(fnm, ' (with ', lnk, '-link)')
+  fnm |>
+    new(Class = 'md_lines')
 }
 
 
