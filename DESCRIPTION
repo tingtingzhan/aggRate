@@ -13,9 +13,9 @@ RoxygenNote: 7.3.3
 Encoding: UTF-8
 License: GPL-2
 Depends: R (>= 4.5)
-Imports: methods, geomtextpath (== 0.2.0), ggplot2 (== 4.0.2), rlang (== 1.2.0), 
+Imports: methods, geomtextpath (== 0.2.0), ggplot2 (== 4.0.3), rlang (== 1.2.0), 
     scales (== 1.4.0), reshape2 (== 1.4.5), matrixStats (== 1.5.0), 
     ordinal (== 2025.12.29), VGAM (== 1.1.14),
     fastmd, ecip
 Suggests: 
-    MASS (== 7.3.65)
+    MASS
